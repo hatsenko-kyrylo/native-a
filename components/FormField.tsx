@@ -37,8 +37,8 @@ const FormField = ({
                     placeholderTextColor='#7b7b8b'
                     onChangeText={handleChangeText}
                     secureTextEntry={title === 'Password' && !showPassword}
-                    onFocus={() => setIsFocused(true)} // Установка фокуса
-                    onBlur={() => setIsFocused(false)} // Снятие фокуса
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
                 />
 
                 {title === 'Password' && (
