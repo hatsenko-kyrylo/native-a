@@ -1,25 +1,17 @@
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import React, { useState } from 'react';
+import { router, usePathname } from 'expo-router';
+
 import { icons } from '@/constants';
 
 interface ISearchInputProps {
-    title: string;
-    value: string;
-    handleChangeText: (e: string) => void;
-    otherStyles: string;
-    keyboardType?: string;
-    placeholder: string;
+    initialQuery: string;
 }
 
-const SearchInput = ({
-    title,
-    value,
-    handleChangeText,
-    otherStyles,
-    placeholder,
-    ...props
-}: ISearchInputProps) => {
+const SearchInput = ({ initialQuery }: ISearchInputProps) => {
     const [isFocused, setIsFocused] = useState(false);
+    const pathname = usePathname();
+    const [query, setQuery] = useState(initialQuery || '');
 
     return (
         <View
@@ -29,15 +21,27 @@ const SearchInput = ({
         >
             <TextInput
                 className='flex-1 text-base text-white font-pregular mt-0.5'
-                value={value}
+                value={query}
                 placeholder='Search for a video topic'
-                placeholderTextColor='#7b7b8b'
-                onChangeText={handleChangeText}
+                placeholderTextColor='#CDCDE0'
+                onChangeText={(e) => setQuery(e)}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
             />
 
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    if (!query) {
+                        Alert.alert(
+                            'Missing query',
+                            'Please input something to search results across database'
+                        );
+                    }
+
+                    if (pathname.startsWith('/search')) router.setParams({ query });
+                    else router.push(`/search/${query}`);
+                }}
+            >
                 <Image
                     source={icons.search}
                     style={{ width: 20, height: 20 }}
