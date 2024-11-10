@@ -111,8 +111,32 @@ export const searchPosts = async (query: string) => {
 
         return posts.documents;
     } catch (error) {
-        // throw error;
         console.error('Error searching posts:', error);
         return [];
+    }
+};
+export const getUserPosts = async (userId: string | undefined) => {
+    try {
+        if (typeof userId === 'string') {
+            const posts = await databases.listDocuments(databaseId, videosCollectionId, [
+                Query.equal('creator', userId),
+            ]);
+
+            return posts.documents;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        console.error('Error searching posts:', error);
+        return [];
+    }
+};
+
+export const signOut = async () => {
+    try {
+        const session = await account.deleteSession('current');
+        return session;
+    } catch (error) {
+        throw error;
     }
 };

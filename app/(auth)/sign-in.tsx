@@ -12,7 +12,6 @@ import { useGlobalContext } from '@/context/GlobalProvider';
 const SignIn = () => {
     const [form, setForm] = useState({ email: '', password: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
-
     const { setUser, setIsLoggedIn } = useGlobalContext();
 
     const submit = async () => {
