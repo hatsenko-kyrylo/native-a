@@ -40,7 +40,7 @@ const TrendingItem = ({ activeItem, item }: ITrendingItemProps) => {
             {play ? (
                 <Video
                     source={{
-                        uri: 'https://sample-videos.com/video321/mp4/480/big_buck_bunny_480p_1mb.mp4',
+                        uri: item.video,
                     }}
                     className='w-52 h-72 rounded-[35px] mt-3 bg-white/10'
                     style={{
