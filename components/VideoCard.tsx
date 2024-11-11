@@ -44,7 +44,7 @@ const VideoCard = ({
             {play ? (
                 <Video
                     source={{
-                        uri: 'https://sample-videos.com/video321/mp4/480/big_buck_bunny_480p_1mb.mp4',
+                        uri: video,
                     }}
                     style={{
                         width: '100%',
